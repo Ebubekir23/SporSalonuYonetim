@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SporSalonu.Core/SporSalonu.Core.csproj" />
+  <Project Path="SporSalonu.Data/SporSalonu.Data.csproj" />
+</Solution>

@@ -1,0 +1,25 @@
+# Projenin PostgreSQL veritabanı. Parola .env dosyasından okunur (repoya girmez; örnek: .env.ornek).
+# Adlar ve port (5434) başka projelerin container'larıyla çakışmasın diye projeye özel seçildi.
+name: sporsalonu
+
+services:
+  db:
+    image: postgres:17
+    container_name: sporsalonu-db
+    environment:
+      POSTGRES_DB: sporsalonu
+      POSTGRES_USER: sporsalonu
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?.env dosyasinda POSTGRES_PASSWORD tanimlanmali}
+    ports:
+      - "5434:5432"
+    volumes:
+      - sporsalonu-veri:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sporsalonu -d sporsalonu"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  sporsalonu-veri:
+    name: sporsalonu-veri
